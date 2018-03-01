@@ -30,12 +30,13 @@ namespace DesignPatterns
         public void DoSthElse() => Console.WriteLine("This is doing sth else");
     }
 
-    public class AnotherConcreteDecorator : Decorator
+
+    public class ConcreteSecondLevelDecorator : ConcreteDecorator
     {
-        public AnotherConcreteDecorator(ITarget targetImplementation) : base(targetImplementation)
+        public ConcreteSecondLevelDecorator(ITarget targetImplementation) : base(targetImplementation)
         {
         }
 
-        public void DoSthCompletelyDifferent() => Console.WriteLine("This is doing sth completely different");
+        public virtual void DoSthCompletelyElse() => Console.WriteLine("This is doing sth else");
     }
 }

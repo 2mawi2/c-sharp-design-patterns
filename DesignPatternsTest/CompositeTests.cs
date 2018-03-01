@@ -13,7 +13,12 @@ namespace DesignPatternsTest
         [Fact]
         public void CompositeShouldCallAllLeafUpdates()
         {
-            var leafs = new List<Mock<IComposite>> {new Mock<IComposite>(), new Mock<IComposite>()};
+            var leafs = new List<Mock<FirstLevelComposite>>
+            {
+                new Mock<FirstLevelComposite>(),
+                new Mock<FirstLevelComposite>()
+            };
+            var secondLevelLeaf = new Mock<SecondLevelLeaf>();
             var composite2 = new Composite
             {
                 Childs =
@@ -22,6 +27,13 @@ namespace DesignPatternsTest
                     new Composite
                     {
                         Childs = {leafs[0].Object}
+                    },
+                    new SecondLevelComposite
+                    {
+                        Childs =
+                        {
+                            secondLevelLeaf.Object
+                        }
                     }
                 }
             };
@@ -29,6 +41,7 @@ namespace DesignPatternsTest
             composite2.Update();
 
             leafs.ForEach(i => i.Verify(j => j.Update()));
+            secondLevelLeaf.Verify(i => i.Update());
         }
     }
 }

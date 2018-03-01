@@ -17,10 +17,10 @@ namespace DesignPatternsTest
             targetDecorated.DoSth();
             targetDecorated.DoSthElse();
 
-            var targetDecoratedAgain = new AnotherConcreteDecorator(targetDecorated);
+            var targetDecoratedAgain = new ConcreteSecondLevelDecorator(targetDecorated);
             targetDecoratedAgain.DoSth();
-            //targetDecoratedAgain.DoSthElse(); This does only work in non-statically typed languages
-            targetDecoratedAgain.DoSthCompletelyDifferent();
+            targetDecoratedAgain.DoSthElse();
+            targetDecoratedAgain.DoSthCompletelyElse();
         }
     }
 }

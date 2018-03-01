@@ -3,20 +3,41 @@ using System.Collections.Generic;
 
 namespace DesignPatterns
 {
-    public interface IComposite
+    #region FirstLevel
+
+    public abstract class FirstLevelComposite
     {
-        void Update();
+        public abstract void Update();
     }
 
-    public class Composite : IComposite
+    public class Composite : FirstLevelComposite
     {
-        public readonly List<IComposite> Childs = new List<IComposite>();
+        public readonly List<FirstLevelComposite> Childs = new List<FirstLevelComposite>();
 
-        public void Update() => Childs.ForEach(i => i.Update());
+        public override void Update() => Childs.ForEach(i => i.Update());
     }
 
-    public class Leaf : IComposite
+    public class Leaf : FirstLevelComposite
     {
-        public void Update() => Console.WriteLine("Got Updated");
+        public override void Update() => Console.WriteLine("Got Updated");
     }
+
+    #endregion
+
+
+    #region SecondLevel
+
+    public abstract class SecondComposite : Composite
+    {
+    }
+
+    public class SecondLevelComposite : SecondComposite
+    {
+    }
+
+    public class SecondLevelLeaf : Leaf
+    {
+    }
+
+    #endregion
 }
